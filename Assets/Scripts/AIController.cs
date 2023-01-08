@@ -9,15 +9,12 @@ public class AIController : MonoBehaviour
 {
     [SerializeField] private float _wanderRadius;
     private NavMeshAgent _agent;
-    private Vector2 finalInput;
-
     private ProjectileLauncher _projectileLauncher;
 
     private void Awake()
     {
         _projectileLauncher = GetComponent<ProjectileLauncher>();
         _agent = GetComponent<NavMeshAgent>();
-
     }
 
 
@@ -54,15 +51,9 @@ public class AIController : MonoBehaviour
 
     private Vector3 RandomNavmeshLocation(float radius)
     {
-        Vector3 randomDirection = Random.insideUnitSphere * radius;
-        randomDirection += transform.position;
+        Vector3 randomDirection = Random.insideUnitSphere * radius + transform.position;
         NavMeshHit hit;
-        Vector3 finalPosition = Vector3.zero;
-        if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
-        {
-            finalPosition = hit.position;
-        }
-        return finalPosition;
+        return NavMesh.SamplePosition(randomDirection, out hit, radius, 1) ? hit.position : Vector3.zero;
     }
 
 }

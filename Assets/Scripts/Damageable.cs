@@ -27,9 +27,11 @@ public class Damageable : MonoBehaviour
 
     }
 
-    private void Die()
+    public void Die()
     {
         OnDie.Invoke();
 
     }
+
+
 }
