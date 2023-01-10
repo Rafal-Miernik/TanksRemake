@@ -8,6 +8,7 @@ public class ProjectileLauncher : MonoBehaviour
     [SerializeField] private float _firePower;
     [SerializeField] private float _cooldownTime;
     [SerializeField] private GameObject _projectile;
+    [SerializeField] private ParticleSystem _shootEffect;
     [SerializeField] private Transform _shootingPoint;
     private bool _canFire = true;
 
@@ -17,6 +18,7 @@ public class ProjectileLauncher : MonoBehaviour
 
         if (_canFire)
         {
+            _shootEffect.Play();
             var currentProjectile = Instantiate(_projectile, _shootingPoint.position, Quaternion.identity);
             currentProjectile.layer = gameObject.layer;
             currentProjectile.GetComponent<Rigidbody>().AddForce(transform.forward * _firePower);

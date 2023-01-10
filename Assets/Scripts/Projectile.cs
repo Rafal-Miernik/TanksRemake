@@ -31,7 +31,11 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-       transform.rotation = Quaternion.LookRotation(_rigidBody.velocity);
+        if(_rigidBody.velocity !=Vector3.zero)
+        {
+         transform.rotation = Quaternion.LookRotation(_rigidBody.velocity);
+        }
+       
     }
 
 }
