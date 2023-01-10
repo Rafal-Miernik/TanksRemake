@@ -7,6 +7,12 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private int _power;
     [SerializeField] private GameObject _explosionParticles;
+    private Rigidbody _rigidBody;
+
+    private void Start()
+    {
+        _rigidBody = GetComponent<Rigidbody>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,5 +29,9 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void Update()
+    {
+       transform.rotation = Quaternion.LookRotation(_rigidBody.velocity);
+    }
 
 }
