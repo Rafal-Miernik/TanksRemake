@@ -16,13 +16,15 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-      if (other.gameObject.layer == this.gameObject.layer)
+        if (other.gameObject.layer == this.gameObject.layer)
             return;
+
+
 
         Instantiate(_explosionParticles, transform.position, Quaternion.identity);
         var damageableObject = other.GetComponent<Damageable>();
 
-        if(damageableObject!=null)
+        if (damageableObject != null)
         {
             damageableObject.TakeDamage(_power);
         }
@@ -31,11 +33,11 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        if(_rigidBody.velocity !=Vector3.zero)
+        if (_rigidBody.velocity != Vector3.zero)
         {
-         transform.rotation = Quaternion.LookRotation(_rigidBody.velocity);
+            transform.rotation = Quaternion.LookRotation(_rigidBody.velocity);
         }
-       
+
     }
 
 }

@@ -6,19 +6,19 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Game Event", fileName = "Game Event")]
 public class GameEvent : ScriptableObject
 {
-    HashSet<GameEventListener> listeners = new HashSet<GameEventListener>();
+    HashSet<GameEventListener> _listeners = new HashSet<GameEventListener>();
 
     public void Invoke()
     {
 
-        foreach (var globalEventListener in listeners)
+        foreach (var globalEventListener in _listeners)
         {
             globalEventListener.RaiseEvent();
         }
 
     }
 
-    public void Register(GameEventListener gameEventListener) => listeners.Add(gameEventListener);
-    public void Deregister(GameEventListener gameEventListener) => listeners.Remove(gameEventListener);
+    public void Register(GameEventListener gameEventListener) => _listeners.Add(gameEventListener);
+    public void Deregister(GameEventListener gameEventListener) => _listeners.Remove(gameEventListener);
 
 }

@@ -6,27 +6,30 @@ using UnityEngine.Events;
 public class GameEventListener : MonoBehaviour
 {
 
-    [SerializeField] protected GameEvent gameEvent;
-    [SerializeField] protected UnityEvent unityEvent;
+    [SerializeField] protected GameEvent _gameEvent;
+    [SerializeField] protected UnityEvent _unityEvent;
 
-    private void OnEnable()
+    private void Awake()
     {
-        if(gameEvent !=null)
+
+        if (_gameEvent != null)
         {
-            gameEvent.Register(this);
+            _gameEvent.Register(this);
         }
-        
+
     }
-    private void OnDisable()
+
+    private void OnDestroy()
     {
-        if (gameEvent != null)
+        if (_gameEvent != null)
         {
-            gameEvent.Deregister(this);
+            _gameEvent.Deregister(this);
         }
     }
+
 
     public virtual void RaiseEvent()
     {
-        unityEvent.Invoke();
+        _unityEvent.Invoke();
     }
 }
